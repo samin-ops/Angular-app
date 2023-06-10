@@ -1,0 +1,67 @@
+<div class="container mt-2">
+  <nav class="p-2 mb-2 border border-info" *ngIf="authenService.hasRole('ADMIN')">
+    <button  type="button" class="btn btn-outline-info" (click)="handleNewProduct()">New Product</button>
+  </nav>
+  <div class="card" *ngIf="products; else : errors">
+    <div class="card-header text-center text-info">Products List</div>
+      <div class="card-body col-12">
+        <!--Formulaire de recherche de produits-->
+        <form [formGroup]="searchFormGroup" (ngSubmit)="handleSeachProducts()">
+          <div class="input-group">
+            <label class="input-group-text text-info">Keyword:</label>
+            <input placeholder="search products" type="text" class="form-control" formControlName="keyword">
+            <button type="button" class="btn btn-info" title="search">
+              <em class="bi bi-search"></em>
+            </button>
+          </div>
+        </form>
+        <!-- Fin formulaire de recherche de produits-->
+        <table aria-describedby="produts" class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Promo</th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of products" class="text-sm-start">
+              <td>{{p.name | titlecase }}</td>
+              <td>{{p.price | currency:"FCFA"}}</td>
+              <td>
+                <span *ngIf="p.promotion==true" class="bi bi-check-circle-fill text-success"></span>
+              </td>
+              <td *ngIf="authenService.hasRole('ADMIN')">
+                <button type="button" (click)="handleSetPromotion(p)" class="btn btn-sm text-sm-center" [ngClass]="p.promotion == true ? 'btn-outline-success':'btn-outline-danger' ">
+                  <span  *ngIf="p.promotion==true" class="fs-6">On</span>
+                  <span  *ngIf="p.promotion==false">Off</span>
+                </button>
+              </td>
+              <td *ngIf="authenService.hasRole('ADMIN')">
+                <button title="Delete" (click)="handleDeleteProducts(p)" class="btn btn-danger btn-sm" type="button">
+                  <span class="bi bi-trash"></span>
+                </button>
+              </td>
+              <td *ngIf="authenService.hasRole('ADMIN')">
+                <button title="Edit" (click)="handleEditProduct(p)" class="btn btn-success btn-sm" type="button">
+                  <span class="bi bi-pen"></span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="nav nav-pills">
+          <li *ngFor="let item of [].constructor(this.totalPages); let i = index ">
+            <a (click)="gotoPage(i)" [ngClass]= "i == currentPage?'btn-info':'btn-outline-info'" class="btn ms-1 mt-1">{{i+1}}</a> <!--ms: margin start, mt: margin top-->
+          </li> <!--[].constructor(this.totalPages): Construire un tableau a partir d'un total de page-->
+        </ul>
+      </div>
+  </div>
+     <ng-template #errors>
+       <div class="text-danger">{{errMessage}}</div>
+     </ng-template>
+</div>
+

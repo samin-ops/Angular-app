@@ -1,0 +1,50 @@
+<div class=" container mt-3">
+  <div class="row">
+    <div class="card ">
+      <div class="form-group">
+      <div class="card-header text-center">
+        Clients List
+      </div>
+      <div class="card-body">
+        <label class="input-group-text">Keyword:</label>
+        <input formControlName="keyword" type="text"class="form-control" placeholder="Search..." [(ngModel)]="filterTerm"
+        />
+      </div>
+  <table aria-describedby="customer list" class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Client Name</th>
+        <th scope="col">Products</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">T. Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of customers | filter: filterTerm">
+        <td>{{c.nom}}</td>
+        <td>{{c.produits}}</td>
+        <td>{{c.qte}}</td>
+        <td>{{c.priUnitaire}}</td>
+        <td>{{c.prixTotal}}</td>
+        <td>
+          <button (click)="handleDeletCustomer(c)" title="Delete" type="button" class="btn btn-danger">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+        <td>
+          <button (click)="handleDisplayCustomer(c)" title="Display" type="button" class="btn btn-success">
+            <i class="bi bi-display"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

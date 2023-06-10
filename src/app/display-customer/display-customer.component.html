@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header text-center">Edit Customer</div>
+      <div class="card-body">
+        <form [formGroup]="customerFormGroup" (ngSubmit)="handleCustomerUpdate()">
+          <div class="mb-3">
+            <label class="form-label">ID: </label>
+            <label class="form-label">{{customer.id}}</label>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input title="name" type="text" formControlName="name" class="form-control">
+            <small *ngIf="customerFormGroup.controls['name'].errors && customerFormGroup.controls['name'].touched" class="text-danger">
+              {{customerService.getErrorMessage('Name ' , customerFormGroup.controls['name'].errors)}}
+            </small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Product</label>
+            <input title="product" type="text" formControlName="product" class="form-control">
+            <small *ngIf="customerFormGroup.controls['product'].errors && customerFormGroup.controls['product'].touched" class="text-danger">
+              {{customerService.getErrorMessage('Name ' , customerFormGroup.controls['product'].errors)}}
+            </small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input title="quantity" type="text" formControlName="quantity" class="form-control">
+            <small *ngIf="customerFormGroup.controls['quantity'].errors && customerFormGroup.controls['quantity'].touched" class="text-danger">
+              {{customerService.getErrorMessage('Name ' , customerFormGroup.controls['quantity'].errors)}}
+            </small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Prix Unitaire</label>
+            <input title="prixUnitaire" type="text" formControlName="prixUnitaire" class="form-control">
+            <small *ngIf="customerFormGroup.controls['prixUnitaire'].errors && customerFormGroup.controls['prixUnitaire'].touched" class="text-danger">
+              {{customerService.getErrorMessage('Name ' , customerFormGroup.controls['prixUnitaire'].errors)}}
+            </small>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Pix Total</label>
+            <input title="prixTotal" type="text" formControlName="prixTotal" class="form-control">
+            <small *ngIf="customerFormGroup.controls['prixTotal'].errors && customerFormGroup.controls['prixTotal'].touched" class="text-danger">
+              {{customerService.getErrorMessage('Name ' , customerFormGroup.controls['prixTotal'].errors)}}
+            </small>
+          </div>
+          <button [disabled]="!customerFormGroup.valid" type="submit" class="btn btn-info">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
