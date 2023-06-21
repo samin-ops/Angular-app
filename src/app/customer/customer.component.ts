@@ -16,7 +16,10 @@ export class CustomerComponent implements OnInit {
   filterTerm!: string;
   customerForm! : FormGroup;
 
-  constructor(private customerServices: CustomerService, private fb: FormBuilder, private routeur: Router) { }
+  constructor(
+    private customerServices: CustomerService,
+    private fb: FormBuilder,
+    private routeur: Router) { }
 
   ngOnInit(): void {
     this.handeleGetCustomer();
